@@ -8,10 +8,10 @@ var tagline2 = document.querySelector('.tagline-2');
 
 // BUTTONS //
 
-var randomCoverButton = document.querySelector('.random-cover-button');
 var saveCoverButton = document.querySelector('.save-cover-button');
 var viewSavedButton = document.querySelector('.view-saved-button');
 var makeCoverButton = document.querySelector('.make-new.button');
+var randomCoverButton = document.querySelector('.random-cover-button');
 
 // We've provided a few variables below
 var savedCovers = [
@@ -24,35 +24,30 @@ var currentCover = {
   cover: cover,
 };
 
-
+console.log(currentCover.title);
 
 // Add your event listeners here 👇
-randomCoverButton.addEventListener('click', generateRandomPoster);
+randomCoverButton.addEventListener('click', generateRandomCover);
 
 // event listener that incorporates the onLoad event
 
-window.addEventListener('load', generateRandomPoster);
+window.addEventListener('load', generateRandomCover);
 
 // function changeWindow();
-
-window.addEventListener('load', function(?)) {
-};
-
-function changeWindow();
-
-function generateRandomPoster() {
-  bookTitle.innerText = titles[getRandomIndex(titles)];
-  tagline1.innerText = descriptors[getRandomIndex(descriptors)];
-  tagline2.innerText = descriptors[getRandomIndex(descriptors)];
-  coverImage.src = covers[getRandomIndex(covers)];
-  updateCurrentCover();
-};
 
 function updateCurrentCover() {
   currentCover.title = bookTitle.innerText;
   currentCover.tagline1 = tagline1.innerText;
   currentCover.tagline2 = tagline2.innerText;
   currentCover.cover = coverImage.src;
+};
+
+function generateRandomCover() {
+  bookTitle.innerText = titles[getRandomIndex(titles)];
+  tagline1.innerText = descriptors[getRandomIndex(descriptors)];
+  tagline2.innerText = descriptors[getRandomIndex(descriptors)];
+  coverImage.src = covers[getRandomIndex(covers)];
+  updateCurrentCover();
 };
 
 // We've provided one function to get you started
@@ -78,7 +73,7 @@ function getRandomIndex(array) {
 // ITERATION 1: SHOW RANDOM COVER
 //  - Function should generate new randomized poster on button click
 //      --> ('.random-cover-button')
-//    - Function is run as a new class instance
+//    - Function is run as a new class instance (UPDATE: not necessary)
 //    - Randomized poster updates currentCover variable
 //      - Function should render changes to the DOM
 //
