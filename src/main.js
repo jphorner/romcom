@@ -6,12 +6,16 @@ var coverImage = document.querySelector('.cover-image');
 var tagline1 = document.querySelector('.tagline-1');
 var tagline2 = document.querySelector('.tagline-2');
 
+
+
 // BUTTONS //
 
 var saveCoverButton = document.querySelector('.save-cover-button');
 var viewSavedButton = document.querySelector('.view-saved-button');
-var makeCoverButton = document.querySelector('.make-new.button');
+var makeCoverButton = document.querySelector('.make-new-button');
 var randomCoverButton = document.querySelector('.random-cover-button');
+
+var viewHomeButton = document.querySelector('.home-button hidden');
 
 // We've provided a few variables below
 var savedCovers = [
@@ -29,9 +33,13 @@ console.log(currentCover.title);
 // Add your event listeners here 👇
 randomCoverButton.addEventListener('click', generateRandomCover);
 
+makeCoverButton.addEventListener('click', makeYourOwnCover);
+
 // event listener that incorporates the onLoad event
 
 window.addEventListener('load', generateRandomCover);
+
+window.addEventListener('load', makeYourOwnCover);
 
 // function changeWindow();
 
@@ -49,6 +57,7 @@ function generateRandomCover() {
   coverImage.src = covers[getRandomIndex(covers)];
   updateCurrentCover();
 };
+
 
 // We've provided one function to get you started
 function getRandomIndex(array) {
