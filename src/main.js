@@ -7,16 +7,12 @@ var tagline1 = document.querySelector('.tagline-1');
 var tagline2 = document.querySelector('.tagline-2');
 
 var formView = document.querySelector('.form-view')
-
 var homeView = document.querySelector('.home-view');
-
-
-
-
-
-
-
-
+// var titleValue = null;
+// var tagline1Value = null;
+// var tagline2Value = null;
+// var coverValue = null;
+var i = titles.length;
 
 // BUTTONS //
 
@@ -24,13 +20,15 @@ var saveCoverButton = document.querySelector('.save-cover-button');
 var viewSavedButton = document.querySelector('.view-saved-button');
 var makeCoverButton = document.querySelector('.make-new-button');
 var randomCoverButton = document.querySelector('.random-cover-button');
-
 var viewHomeButton = document.querySelector('.home-button');
+var createNewBookButton = document.querySelector('.create-new-book-button');
 
 // We've provided a few variables below
-var savedCovers = [
-  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
-];
+
+// var savedCovers = [
+//   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
+// ];
+
 var currentCover = {
   title: title,
   tagline1: tagline1,
@@ -38,24 +36,22 @@ var currentCover = {
   cover: cover,
 };
 
-console.log(currentCover.title);
 
 // Add your event listeners here 👇
 randomCoverButton.addEventListener('click', generateRandomCover);
-
 makeCoverButton.addEventListener('click', showFormView);
-
 viewHomeButton.addEventListener('click', showHomeView);
-//
+createNewBookButton.addEventListener('click', generateCustomCover);
+
 // saveCoverButton.addEventListener('click', saveCurrentCovers);
-
 viewSavedButton.addEventListener('click', showSavedCovers);
-//
-// randomCoverButton.addEventListener('click', makeRandomCover);
-
-// event listener that incorporates the onLoad event
-
 window.addEventListener('load', generateRandomCover);
+
+// INPUT FIELDS //
+// var coverField = document.querySelector('#cover');
+// var titleField = document.querySelector('#title');
+// var firstDescriptorField = document.querySelector('#descriptor1');
+// var secondDescriptorField = document.querySelector('#descriptor2');
 
 
 // function changeWindow();
@@ -68,6 +64,7 @@ function updateCurrentCover() {
 };
 
 function generateRandomCover() {
+  // event.preventDefault();
   bookTitle.innerText = titles[getRandomIndex(titles)];
   tagline1.innerText = descriptors[getRandomIndex(descriptors)];
   tagline2.innerText = descriptors[getRandomIndex(descriptors)];
@@ -83,9 +80,11 @@ function showFormView() {
   makeCoverButton.classList.add('hidden');
   viewHomeButton.classList.remove('hidden');
   viewSavedButton.classList.remove('hidden');
+  return;
 };
 
 function showHomeView() {
+  // event.preventDefault();
   homeView.classList.remove('hidden');
   formView.classList.add('hidden');
   saveCoverButton.classList.remove('hidden');
@@ -103,6 +102,24 @@ function showSavedCovers() {
   makeCoverButton.classList.remove('hidden');
   viewHomeButton.classList.remove('hidden');
   viewSavedButton.classList.add('hidden');
+  return;
+};
+
+function generateCustomCover() {
+  event.preventDefault();
+  var titleValue = document.querySelector('#title').value;
+  var tagline1Value = document.querySelector('#descriptor1').value;
+  var tagline2Value = document.querySelector('#descriptor2').value;
+  var coverValue = document.querySelector('#cover').value;
+  titles.push(titleValue);
+  covers.push(coverValue);
+  descriptors.push(tagline1Value, tagline2Value);
+  currentCover = new Cover(coverValue, titleValue, tagline1Value, tagline2Value);
+  showHomeView();
+  coverImage.src = currentCover.cover;
+  bookTitle.innerText = currentCover.title;
+  tagline1.innerText = currentCover.tagline1;
+  tagline2.innerText = currentCover.tagline2;
 };
 
 // We've provided one function to get you started
