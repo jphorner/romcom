@@ -5,14 +5,14 @@ var bookTagline = document.querySelector('.tagline');
 var coverImage = document.querySelector('.cover-image');
 var tagline1 = document.querySelector('.tagline-1');
 var tagline2 = document.querySelector('.tagline-2');
-
 var formView = document.querySelector('.form-view')
 var homeView = document.querySelector('.home-view');
+var savedView = document.querySelector('.saved-view');
+var savedCoversSection = document.querySelector('.saved-covers-section');
 // var titleValue = null;
 // var tagline1Value = null;
 // var tagline2Value = null;
 // var coverValue = null;
-var i = titles.length;
 
 // BUTTONS //
 
@@ -25,9 +25,9 @@ var createNewBookButton = document.querySelector('.create-new-book-button');
 
 // We've provided a few variables below
 
-// var savedCovers = [
-//   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
-// ];
+var savedCovers = [
+  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
+];
 
 var currentCover = {
   title: title,
@@ -42,6 +42,7 @@ randomCoverButton.addEventListener('click', generateRandomCover);
 makeCoverButton.addEventListener('click', showFormView);
 viewHomeButton.addEventListener('click', showHomeView);
 createNewBookButton.addEventListener('click', generateCustomCover);
+saveCoverButton.addEventListener('click', saveCover)
 
 // saveCoverButton.addEventListener('click', saveCurrentCovers);
 viewSavedButton.addEventListener('click', showSavedCovers);
@@ -75,6 +76,7 @@ function generateRandomCover() {
 function showFormView() {
   homeView.classList.add('hidden');
   formView.classList.remove('hidden');
+  savedView.classList.add('hidden');
   saveCoverButton.classList.add('hidden');
   randomCoverButton.classList.add('hidden');
   makeCoverButton.classList.add('hidden');
@@ -87,6 +89,7 @@ function showHomeView() {
   // event.preventDefault();
   homeView.classList.remove('hidden');
   formView.classList.add('hidden');
+  savedView.classList.add('hidden');
   saveCoverButton.classList.remove('hidden');
   randomCoverButton.classList.remove('hidden');
   makeCoverButton.classList.remove('hidden');
@@ -95,13 +98,25 @@ function showHomeView() {
 };
 
 function showSavedCovers() {
+  savedCoversSection.innerHTML = ``;
   homeView.classList.add('hidden');
   formView.classList.add('hidden');
+  savedView.classList.remove('hidden');
   saveCoverButton.classList.add('hidden');
   randomCoverButton.classList.add('hidden');
   makeCoverButton.classList.remove('hidden');
   viewHomeButton.classList.remove('hidden');
   viewSavedButton.classList.add('hidden');
+  for (var i = 0; i < savedCovers.length; i++) {
+    savedCoversSection.innerHTML += `
+      <article class="mini-cover">
+        <img class="mini-cover" src="${savedCovers[i].cover}">
+        <p class="cover-title">${savedCovers[i].title}</p>
+        <p class="tagline">A tale of ${savedCovers[i].tagline1} and ${savedCovers[i].tagline2}</p>
+      </article>
+      `
+  }
+
   return;
 };
 
@@ -122,11 +137,19 @@ function generateCustomCover() {
   tagline2.innerText = currentCover.tagline2;
 };
 
+function saveCover() {
+  event.preventDefault();
+  debugger;
+  currentCover = new Cover(currentCover.cover, currentCover.title, currentCover.tagline1, currentCover.tagline2);
+  if (currentCover !== savedCovers[savedCovers.length - 1]) {
+    savedCovers.push(currentCover);
+  }
+};
+
 // We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
-
 
 
 // ITERATION 0: MAIN PAGE
