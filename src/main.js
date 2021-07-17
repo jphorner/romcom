@@ -6,6 +6,16 @@ var coverImage = document.querySelector('.cover-image');
 var tagline1 = document.querySelector('.tagline-1');
 var tagline2 = document.querySelector('.tagline-2');
 
+var formView = document.querySelector('.form-view')
+
+var homeView = document.querySelector('.home-view');
+
+
+
+
+
+
+
 
 
 // BUTTONS //
@@ -15,7 +25,7 @@ var viewSavedButton = document.querySelector('.view-saved-button');
 var makeCoverButton = document.querySelector('.make-new-button');
 var randomCoverButton = document.querySelector('.random-cover-button');
 
-var viewHomeButton = document.querySelector('.home-button hidden');
+var viewHomeButton = document.querySelector('.home-button');
 
 // We've provided a few variables below
 var savedCovers = [
@@ -33,13 +43,20 @@ console.log(currentCover.title);
 // Add your event listeners here 👇
 randomCoverButton.addEventListener('click', generateRandomCover);
 
-makeCoverButton.addEventListener('click', makeYourOwnCover);
+makeCoverButton.addEventListener('click', showFormView);
+
+viewHomeButton.addEventListener('click', showHomeView);
+//
+// saveCoverButton.addEventListener('click', saveCurrentCovers);
+
+viewSavedButton.addEventListener('click', showSavedCovers);
+//
+// randomCoverButton.addEventListener('click', makeRandomCover);
 
 // event listener that incorporates the onLoad event
 
 window.addEventListener('load', generateRandomCover);
 
-window.addEventListener('load', makeYourOwnCover);
 
 // function changeWindow();
 
@@ -58,6 +75,35 @@ function generateRandomCover() {
   updateCurrentCover();
 };
 
+function showFormView() {
+  homeView.classList.add('hidden');
+  formView.classList.remove('hidden');
+  saveCoverButton.classList.add('hidden');
+  randomCoverButton.classList.add('hidden');
+  makeCoverButton.classList.add('hidden');
+  viewHomeButton.classList.remove('hidden');
+  viewSavedButton.classList.remove('hidden');
+};
+
+function showHomeView() {
+  homeView.classList.remove('hidden');
+  formView.classList.add('hidden');
+  saveCoverButton.classList.remove('hidden');
+  randomCoverButton.classList.remove('hidden');
+  makeCoverButton.classList.remove('hidden');
+  viewHomeButton.classList.add('hidden');
+  viewSavedButton.classList.remove('hidden');
+};
+
+function showSavedCovers() {
+  homeView.classList.add('hidden');
+  formView.classList.add('hidden');
+  saveCoverButton.classList.add('hidden');
+  randomCoverButton.classList.add('hidden');
+  makeCoverButton.classList.remove('hidden');
+  viewHomeButton.classList.remove('hidden');
+  viewSavedButton.classList.add('hidden');
+};
 
 // We've provided one function to get you started
 function getRandomIndex(array) {
