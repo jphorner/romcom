@@ -9,11 +9,6 @@ var formView = document.querySelector('.form-view')
 var homeView = document.querySelector('.home-view');
 var savedView = document.querySelector('.saved-view');
 var savedCoversSection = document.querySelector('.saved-covers-section');
-var miniCover = document.querySelector('.mini-cover');
-// var titleValue = null;
-// var tagline1Value = null;
-// var tagline2Value = null;
-// var coverValue = null;
 
 // BUTTONS //
 
@@ -44,17 +39,9 @@ viewHomeButton.addEventListener('click', showHomeView);
 createNewBookButton.addEventListener('click', generateCustomCover);
 saveCoverButton.addEventListener('click', saveCover)
 viewSavedButton.addEventListener('click', showSavedCovers);
-miniCover.addEventListener('dblclick', deleteCover);
 window.addEventListener('load', generateRandomCover);
+document.addEventListener('dblclick', deleteCover);
 
-// INPUT FIELDS //
-// var coverField = document.querySelector('#cover');
-// var titleField = document.querySelector('#title');
-// var firstDescriptorField = document.querySelector('#descriptor1');
-// var secondDescriptorField = document.querySelector('#descriptor2');
-
-
-// function changeWindow();
 
 function updateCurrentCover() {
   currentCover.title = bookTitle.innerText;
@@ -63,12 +50,19 @@ function updateCurrentCover() {
   currentCover.cover = coverImage.src;
 };
 
-function deleteCover() {
-  console.log(event.target.parentNode)
+function deleteCover(targetId) {
+  var targetId = event.target.parentNode.id;
+  var targetObject = event.target.parentNode;
+  console.log(targetObject);
+  for (var i = 0; i < savedCovers.length; i++) {
+    if (savedCovers[i].id == targetId) {
+      targetObject.parentNode.removeChild(targetObject);
+      savedCovers.splice(i, 1);
+    }
+  }
 };
 
 function generateRandomCover() {
-  // event.preventDefault();
   bookTitle.innerText = titles[getRandomIndex(titles)];
   tagline1.innerText = descriptors[getRandomIndex(descriptors)];
   tagline2.innerText = descriptors[getRandomIndex(descriptors)];
@@ -76,50 +70,55 @@ function generateRandomCover() {
   currentCover = new Cover(coverImage.src, bookTitle.innerText, tagline1.innerText, tagline2.innerText);
 };
 
+function hide(element) {
+  element.classList.add('hidden');
+};
+
+function show(element) {
+  element.classList.remove('hidden');
+};
+
 function showFormView() {
-  homeView.classList.add('hidden');
-  formView.classList.remove('hidden');
-  savedView.classList.add('hidden');
-  saveCoverButton.classList.add('hidden');
-  randomCoverButton.classList.add('hidden');
-  makeCoverButton.classList.add('hidden');
-  viewHomeButton.classList.remove('hidden');
-  viewSavedButton.classList.remove('hidden');
-  return;
+  hide(homeView);
+  hide(savedView);
+  hide(saveCoverButton);
+  hide(randomCoverButton);
+  hide(makeCoverButton);
+  show(formView);
+  show(viewHomeButton);
+  show(viewSavedButton);
 };
 
 function showHomeView() {
-  // event.preventDefault();
-  homeView.classList.remove('hidden');
-  formView.classList.add('hidden');
-  savedView.classList.add('hidden');
-  saveCoverButton.classList.remove('hidden');
-  randomCoverButton.classList.remove('hidden');
-  makeCoverButton.classList.remove('hidden');
-  viewHomeButton.classList.add('hidden');
-  viewSavedButton.classList.remove('hidden');
+  hide(formView);
+  hide(savedView);
+  hide(viewHomeButton);
+  show(saveCoverButton);
+  show(randomCoverButton);
+  show(makeCoverButton);
+  show(homeView);
+  show(viewSavedButton);
 };
 
 function showSavedCovers() {
+  hide(homeView);
+  hide(formView);
+  hide(saveCoverButton);
+  hide(randomCoverButton);
+  hide(viewSavedButton);
+  show(savedView);
+  show(makeCoverButton);
+  show(viewHomeButton);
   savedCoversSection.innerHTML = ``;
-  homeView.classList.add('hidden');
-  formView.classList.add('hidden');
-  savedView.classList.remove('hidden');
-  saveCoverButton.classList.add('hidden');
-  randomCoverButton.classList.add('hidden');
-  makeCoverButton.classList.remove('hidden');
-  viewHomeButton.classList.remove('hidden');
-  viewSavedButton.classList.add('hidden');
   for (var i = 0; i < savedCovers.length; i++) {
     savedCoversSection.innerHTML += `
-      <article class="mini-cover">
+      <article class="mini-cover" id="${savedCovers[i].id}">
         <img class="mini-cover" src="${savedCovers[i].cover}">
         <h2 class="cover-title">${savedCovers[i].title}</h2>
-        <h3 class="tagline">A tale of <span class="tagline-1>"${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+        <h3 class="tagline">A tale of ${savedCovers[i].tagline1} and ${savedCovers[i].tagline2} </h3>
       </article>
       `
   }
-  // return;
 };
 
 function generateCustomCover() {
@@ -140,13 +139,9 @@ function generateCustomCover() {
 };
 
 function saveCover() {
-  // event.preventDefault();
-  // debugger;
-  // updateCurrentCover();
   if (!savedCovers.includes(currentCover)) {
-  savedCovers.push(currentCover);
+    savedCovers.push(currentCover);
   }
-  // currentCover = new Cover(currentCover.cover, currentCover.title, currentCover.tagline1, currentCover.tagline2);
 };
 
 // We've provided one function to get you started
