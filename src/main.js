@@ -9,6 +9,7 @@ var formView = document.querySelector('.form-view')
 var homeView = document.querySelector('.home-view');
 var savedView = document.querySelector('.saved-view');
 var savedCoversSection = document.querySelector('.saved-covers-section');
+var miniCover = document.querySelector('.mini-cover');
 // var titleValue = null;
 // var tagline1Value = null;
 // var tagline2Value = null;
@@ -36,16 +37,14 @@ var currentCover = {
   cover: cover,
 };
 
-
 // Add your event listeners here 👇
 randomCoverButton.addEventListener('click', generateRandomCover);
 makeCoverButton.addEventListener('click', showFormView);
 viewHomeButton.addEventListener('click', showHomeView);
 createNewBookButton.addEventListener('click', generateCustomCover);
 saveCoverButton.addEventListener('click', saveCover)
-
-// saveCoverButton.addEventListener('click', saveCurrentCovers);
 viewSavedButton.addEventListener('click', showSavedCovers);
+miniCover.addEventListener('dblclick', deleteCover);
 window.addEventListener('load', generateRandomCover);
 
 // INPUT FIELDS //
@@ -64,13 +63,17 @@ function updateCurrentCover() {
   currentCover.cover = coverImage.src;
 };
 
+function deleteCover() {
+  console.log(event.target.parentNode)
+};
+
 function generateRandomCover() {
   // event.preventDefault();
   bookTitle.innerText = titles[getRandomIndex(titles)];
   tagline1.innerText = descriptors[getRandomIndex(descriptors)];
   tagline2.innerText = descriptors[getRandomIndex(descriptors)];
   coverImage.src = covers[getRandomIndex(covers)];
-  updateCurrentCover();
+  currentCover = new Cover(coverImage.src, bookTitle.innerText, tagline1.innerText, tagline2.innerText);
 };
 
 function showFormView() {
@@ -111,13 +114,12 @@ function showSavedCovers() {
     savedCoversSection.innerHTML += `
       <article class="mini-cover">
         <img class="mini-cover" src="${savedCovers[i].cover}">
-        <p class="cover-title">${savedCovers[i].title}</p>
-        <p class="tagline">A tale of ${savedCovers[i].tagline1} and ${savedCovers[i].tagline2}</p>
+        <h2 class="cover-title">${savedCovers[i].title}</h2>
+        <h3 class="tagline">A tale of <span class="tagline-1>"${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
       </article>
       `
   }
-
-  return;
+  // return;
 };
 
 function generateCustomCover() {
@@ -138,12 +140,13 @@ function generateCustomCover() {
 };
 
 function saveCover() {
-  event.preventDefault();
-  debugger;
-  currentCover = new Cover(currentCover.cover, currentCover.title, currentCover.tagline1, currentCover.tagline2);
-  if (currentCover !== savedCovers[savedCovers.length - 1]) {
-    savedCovers.push(currentCover);
+  // event.preventDefault();
+  // debugger;
+  // updateCurrentCover();
+  if (!savedCovers.includes(currentCover)) {
+  savedCovers.push(currentCover);
   }
+  // currentCover = new Cover(currentCover.cover, currentCover.title, currentCover.tagline1, currentCover.tagline2);
 };
 
 // We've provided one function to get you started
