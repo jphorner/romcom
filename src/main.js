@@ -44,13 +44,6 @@ window.addEventListener('load', generateRandomCover);
 
 //FUNCTIONS
 
-// function updateCurrentCover() {
-//   currentCover.title = bookTitle.innerText;
-//   currentCover.tagline1 = tagline1.innerText;
-//   currentCover.tagline2 = tagline2.innerText;
-//   currentCover.cover = coverImage.src;
-// };
-
 function deleteCover(targetId) {
   var targetId = event.target.parentNode.id;
   var targetObject = event.target.parentNode;
@@ -80,13 +73,16 @@ function generateCustomCover() {
   tagline2.innerText = currentCover.tagline2;
 };
 
-
 function generateRandomCover() {
   bookTitle.innerText = titles[getRandomIndex(titles)];
   tagline1.innerText = descriptors[getRandomIndex(descriptors)];
   tagline2.innerText = descriptors[getRandomIndex(descriptors)];
   coverImage.src = covers[getRandomIndex(covers)];
   currentCover = new Cover(coverImage.src, bookTitle.innerText, tagline1.innerText, tagline2.innerText);
+};
+
+function getRandomIndex(array) {
+  return Math.floor(Math.random() * array.length);
 };
 
 function hide(element) {
@@ -140,40 +136,17 @@ function showSavedCovers() {
   }
 };
 
-// function generateCustomCover() {
-//   event.preventDefault();
-//   var titleValue = document.querySelector('#title').value;
-//   var tagline1Value = document.querySelector('#descriptor1').value;
-//   var tagline2Value = document.querySelector('#descriptor2').value;
-//   var coverValue = document.querySelector('#cover').value;
-//   titles.push(titleValue);
-//   covers.push(coverValue);
-//   descriptors.push(tagline1Value, tagline2Value);
-//   currentCover = new Cover(coverValue, titleValue, tagline1Value, tagline2Value);
-//   showHomeView();
-//   coverImage.src = currentCover.cover;
-//   bookTitle.innerText = currentCover.title;
-//   tagline1.innerText = currentCover.tagline1;
-//   tagline2.innerText = currentCover.tagline2;
-// };
-
 function saveCover() {
   if (!savedCovers.includes(currentCover)) {
     savedCovers.push(currentCover);
   }
 };
 
-
 function updateCurrentCover() {
   currentCover.title = bookTitle.innerText;
   currentCover.tagline1 = tagline1.innerText;
   currentCover.tagline2 = tagline2.innerText;
   currentCover.cover = coverImage.src;
-};
-
-// We've provided one function to get you started
-function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
 };
 
 
