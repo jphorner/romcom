@@ -1,7 +1,8 @@
 # RomCom
 
 RomCom is a web app which generates romance novel covers.
-[Click here to access the app.](https://jphorner.github.io/romcom/)
+
+[Click here to access RomCom.](https://jphorner.github.io/romcom/)
 
 ## Usage
 
@@ -13,6 +14,7 @@ RomCom allows users to:
 - Delete covers by double-clicking them from the Saved Covers page
 
 ## Demonstration
+![recording (4)](https://user-images.githubusercontent.com/82003147/126085581-89cf0b73-034b-4f19-86a1-29eac96749a6.gif)
 
 
 ## Contributors
