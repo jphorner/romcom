@@ -1,23 +1,23 @@
 // Create variables targetting the relevant DOM elements here 👇
 
-var bookTitle = document.querySelector('.cover-title');
 var bookTagline = document.querySelector('.tagline');
+var bookTitle = document.querySelector('.cover-title');
 var coverImage = document.querySelector('.cover-image');
+var formView = document.querySelector('.form-view');
+var homeView = document.querySelector('.home-view');
+var savedCoversSection = document.querySelector('.saved-covers-section');
+var savedView = document.querySelector('.saved-view');
 var tagline1 = document.querySelector('.tagline-1');
 var tagline2 = document.querySelector('.tagline-2');
-var formView = document.querySelector('.form-view')
-var homeView = document.querySelector('.home-view');
-var savedView = document.querySelector('.saved-view');
-var savedCoversSection = document.querySelector('.saved-covers-section');
 
 // BUTTONS //
 
+var createNewBookButton = document.querySelector('.create-new-book-button');
 var saveCoverButton = document.querySelector('.save-cover-button');
 var viewSavedButton = document.querySelector('.view-saved-button');
 var makeCoverButton = document.querySelector('.make-new-button');
 var randomCoverButton = document.querySelector('.random-cover-button');
 var viewHomeButton = document.querySelector('.home-button');
-var createNewBookButton = document.querySelector('.create-new-book-button');
 
 // We've provided a few variables below
 
